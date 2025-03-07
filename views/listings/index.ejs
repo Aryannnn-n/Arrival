@@ -1,0 +1,150 @@
+<%- layout('/layouts/boilerplate') -%>
+
+    <style>
+        #filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter {
+            text-align: center;
+            margin-right: 2rem;
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+
+        .filter:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        .filter p {
+            font-size: 0.8rem;
+        }
+
+        .tax-info {
+            display: none;
+            font-size: 0.8rem;
+            color: rgb(246, 209, 0);
+        }
+
+        .tax-toggle {
+            border: 1px solid black;
+            border-radius: 1rem;
+            padding: 1rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+    </style>
+
+    <body>
+        <!-- <h1>All Listings</h1> -->
+        <%= success %>
+            <!-- <form action="/listings/new" method="get">
+            <button>Add Listing</button>
+        </form> -->
+            <div id="filters">
+
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <p>Beachfront</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-tree"></i>
+                    <p>Tropical</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-city"></i>
+                    <p>Top Cities</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-parachute-box"></i>
+                    <p>Adventure</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-house"></i>
+                    <p>Tiny Homes</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <p>Villa's</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                    <p>Amazing View</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-tree-city"></i>
+                    <p>Tree House</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-snowflake"></i>
+                    <p>Artic</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-house-laptop"></i>
+                    <p>Cabins</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-water"></i>
+                    <p>Lake</p>
+                </div>
+                <div class="filter mt-3">
+                    <i class="fa-solid fa-wine-bottle"></i>
+                    <p>Vineyards</p>
+                </div>
+               
+
+
+                <div class="tax-toggle">
+                    <div class="form-check-reverse form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After
+                            Taxes</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+                <% data.forEach(elm=> { %>
+                    <a href="/listings/<%= elm._id %>" class="listing-link">
+
+                        <div class="card col listing-card">
+                            <img src="<%= elm.image.url %>" class="card-img-top" alt="listing_image"
+                                style="height: 20rem" ;>
+                            <div class="card-img-overlay"></div>
+                            <div class=" card-body">
+                                <p class="card-text">
+                                    <b>
+                                        <%= elm.title %>
+                                    </b>
+                                    <br>
+                                    &#8377; <%= elm.price.toLocaleString("en-IN") %> / night
+                                        <i class="tax-info"> &nbsp; &nbsp; <b>+18% GST</b></i>
+                                </p>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </a>
+            </div>
+
+    </body>
+
+    <script>
+        let taxSwitch = document.getElementById("flexSwitchCheckDefault")
+        taxSwitch.addEventListener("click", () => {
+            let taxInfo = document.getElementsByClassName('tax-info')
+            for (info of taxInfo) {
+                if (info.style.display != 'inline') {
+                    info.style.display = 'inline'
+                } else {
+                    info.style.display = 'none'
+                }
+            }
+
+        })
+    </script>
